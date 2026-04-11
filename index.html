@@ -160,31 +160,36 @@ function onPhoto(e){
   var file=e.target.files[0];if(!file||!pendId)return;
   var photo=sites[cur].photos.find(function(p){return p.id===pendId;});if(!photo)return;
   var sn=sites[cur].name;
+  var fn,ck;
+  if(pendMode==='pano'){photo.panoCount=(photo.panoCount||0)+1;photo.taken=true;fn=sn+'_'+pendId+'-pano'+photo.panoCount+'.jpg';ck=sn+'_'+pendId+'_p'+photo.panoCount;}
+  else{photo.taken=true;fn=sn+'_'+pendId+'.jpg';ck=sn+'_'+pendId;}
+  save();
+  var nt=document.getElementById('notice'),ht=document.getElementById('hint');
+
+  // 撮影ファイルを直接使う（data:URLを経由しない）
+  var renamedFile=new File([file],fn,{type:'image/jpeg'});
+
+  // サムネイル用にだけFileReaderを使う
   var reader=new FileReader();
-  reader.onload=function(ev){
-    var fn,ck;
-    if(pendMode==='pano'){photo.panoCount=(photo.panoCount||0)+1;photo.taken=true;fn=sn+'_'+pendId+'-pano'+photo.panoCount+'.jpg';ck=sn+'_'+pendId+'_p'+photo.panoCount;}
-    else{photo.taken=true;fn=sn+'_'+pendId+'.jpg';ck=sn+'_'+pendId;}
-    cache[ck]=ev.target.result;save();
-    var blob=toBlob(ev.target.result);
-    var sf=new File([blob],fn,{type:'image/jpeg'});
-    var nt=document.getElementById('notice'),ht=document.getElementById('hint');
-    var blobUrl=URL.createObjectURL(blob);
-    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[sf]})){
-      navigator.share({files:[sf],title:fn})
-        .then(function(){nt.textContent=fn+' を保存しました';ht.textContent='';setTimeout(function(){nt.textContent='';URL.revokeObjectURL(blobUrl);},4000);})
-        .catch(function(){
-          var a=document.createElement('a');a.href=blobUrl;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);
-          nt.textContent=fn+' を保存中...';ht.textContent='「ダウンロード」フォルダに保存されます';
-          setTimeout(function(){nt.textContent='';ht.textContent='';URL.revokeObjectURL(blobUrl);},8000);
-        });
-    }else{
-      var a=document.createElement('a');a.href=blobUrl;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);
-      nt.textContent=fn+' を保存中...';ht.textContent='「ダウンロード」フォルダに保存されます';
-      setTimeout(function(){nt.textContent='';ht.textContent='';URL.revokeObjectURL(blobUrl);},8000);
-    }
-    renderShoot();pendId=null;pendMode=null;
-  };reader.readAsDataURL(file);
+  reader.onload=function(ev){cache[ck]=ev.target.result;renderShoot();};
+  reader.readAsDataURL(file);
+
+  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[renamedFile]})){
+    navigator.share({files:[renamedFile],title:fn})
+      .then(function(){nt.textContent=fn+' を保存しました';ht.textContent='';setTimeout(function(){nt.textContent='';},4000);})
+      .catch(function(){
+        var blobUrl=URL.createObjectURL(renamedFile);
+        var a=document.createElement('a');a.href=blobUrl;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);
+        nt.textContent=fn+' を保存中...';ht.textContent='「ダウンロード」フォルダに保存されます';
+        setTimeout(function(){nt.textContent='';ht.textContent='';URL.revokeObjectURL(blobUrl);},8000);
+      });
+  }else{
+    var blobUrl=URL.createObjectURL(renamedFile);
+    var a=document.createElement('a');a.href=blobUrl;a.download=fn;document.body.appendChild(a);a.click();document.body.removeChild(a);
+    nt.textContent=fn+' を保存中...';ht.textContent='「ダウンロード」フォルダに保存されます';
+    setTimeout(function(){nt.textContent='';ht.textContent='';URL.revokeObjectURL(blobUrl);},8000);
+  }
+  pendId=null;pendMode=null;
 }
 function viewPhoto(k,lbl){var img=cache[k];if(!img){alert('写真データがありません。');return;}document.getElementById('vimg').src=img;document.getElementById('vlbl').textContent=lbl;document.getElementById('m-view').style.display='block';}
 function showAdd(){document.getElementById('m-pid').value='';document.getElementById('m-desc').value='';document.getElementById('m-add').style.display='block';}
