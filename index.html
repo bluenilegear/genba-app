@@ -100,15 +100,15 @@ input[type=file]{display:none;}
 <script>
 var SITES=[
 {name:"特土002",photos:[
-{id:"全景1",desc:"全景（左）"},{id:"全景2",desc:"全景（中）"},{id:"全景3",desc:"全景（右）"},
+{id:"zen1",desc:"全景（左）"},{id:"zen2",desc:"全景（中）"},{id:"zen3",desc:"全景（右）"},
 {id:"P1",desc:"敷砂の状況"},{id:"P2",desc:"吹付の状況"},{id:"P3",desc:"擁壁の状況"},{id:"P4",desc:"落石防護柵の状況"},{id:"P5",desc:"擁壁の錆汁"},{id:"P6",desc:"排水路吞口の状況"},{id:"P7",desc:"排水路の状況"},{id:"P8-1",desc:"排水路の落石"},{id:"P8-2",desc:"排水路の落石"},{id:"P9-1",desc:"排水路の状況"},{id:"P9-2",desc:"排水路の状況"},{id:"P10",desc:"排水路の状況"},{id:"P11",desc:"吹付の亀裂"},{id:"P12-1",desc:"吹付の亀裂"},{id:"P12-2",desc:"吹付の亀裂"},{id:"P13",desc:"のり肩の状況"},{id:"P14",desc:"落石防護網の状況"},{id:"P15",desc:"擁壁の状況"},{id:"P16",desc:"吹付の亀裂"},{id:"P17-1",desc:"吹付上の落石"},{id:"P17-2",desc:"吹付の落石"},{id:"P18",desc:"のり肩の状況"},{id:"P19-1",desc:"吹付の亀裂"},{id:"P19-2",desc:"吹付の亀裂"},{id:"P20-1",desc:"吹付の亀裂"},{id:"P20-2",desc:"吹付の亀裂"},{id:"P20-3",desc:"吹付の亀裂"},{id:"P21",desc:"吹付の状況"},{id:"P22-1",desc:"落石防護網の状況"}
 ]},
 {name:"特土003",photos:[
-{id:"全景1",desc:"全景（左）"},{id:"全景2",desc:"全景（中）"},{id:"全景3",desc:"全景（右）"},
+{id:"zen1",desc:"全景（左）"},{id:"zen2",desc:"全景（中）"},{id:"zen3",desc:"全景（右）"},
 {id:"P1",desc:"擁壁の状況"},{id:"P2-1",desc:"落石防護柵の状況"},{id:"P2-2",desc:"落石防護柵の状況"},{id:"P3-1",desc:"排水路の状況"},{id:"P3-2",desc:"排水路の状況"},{id:"P4",desc:"排水路の閉塞"},{id:"P5",desc:"排水路の閉塞"},{id:"P6-1",desc:"のり面の状況"},{id:"P6-2",desc:"のり面の状況"},{id:"P7",desc:"排水路の閉塞"},{id:"P8",desc:"のり面の状況"},{id:"P9-1",desc:"露岩の状況"},{id:"P9-2",desc:"露岩の状況"},{id:"P10",desc:"排水路の閉塞"},{id:"P11",desc:"のり面の状況"},{id:"P12-1",desc:"排水路の閉塞"},{id:"P12-2",desc:"排水路の閉塞"},{id:"P13",desc:"のり面の荒廃"},{id:"P14",desc:"排水路の閉塞"},{id:"P15",desc:"排水路の閉塞"},{id:"P16-1",desc:"のり面の状況"},{id:"P16-2",desc:"のり面の状況"},{id:"P17-1",desc:"小段Coの浮き"},{id:"P17-2",desc:"小段Coの浮き"},{id:"P18",desc:"のり面の状況"},{id:"P19",desc:"のり面の小崩壊"},{id:"P20",desc:"のり面の状況"},{id:"P21",desc:"排水路の閉塞"},{id:"P22",desc:"のり面の状況"},{id:"P23",desc:"のり肩の状況"}
 ]},
 {name:"特土004",photos:[
-{id:"全景1",desc:"全景（左）"},{id:"全景2",desc:"全景（中）"},{id:"全景3",desc:"全景（右）"},
+{id:"zen1",desc:"全景（左）"},{id:"zen2",desc:"全景（中）"},{id:"zen3",desc:"全景（右）"},
 {id:"P1",desc:"排水路の状況"},{id:"P2",desc:"のり面の状況"},{id:"P3",desc:"排水路の状況"},{id:"P4",desc:"のり面の状況"},{id:"P5",desc:"排水路の状況"},{id:"P6",desc:"排水路の閉塞"},{id:"P7",desc:"のり面の状況"},{id:"P8",desc:"排水路の閉塞"},{id:"P9",desc:"排水路の閉塞"},{id:"P10",desc:"のり面の状況"},{id:"P11",desc:"排水路の状況"},{id:"P12",desc:"のり面の状況"},{id:"P13",desc:"のり面の状況"},{id:"P14",desc:"のり面の状況"},{id:"P15",desc:"排水路の閉塞"},{id:"P16",desc:"のり面の状況"},{id:"P17",desc:"排水路の閉塞"},{id:"P18",desc:"のり面の荒廃"},{id:"P19-1",desc:"のり面の表層滑り"},{id:"P19-2",desc:"のり面の表層滑り"},{id:"P20",desc:"排水路の閉塞"},{id:"P21",desc:"小段Coの割れ"},{id:"P22",desc:"のり面の荒廃"},{id:"P23",desc:"排水路の閉塞"},{id:"P24",desc:"のり面の状況"},{id:"P25-1",desc:"のり面の状況"},{id:"P25-2",desc:"のり面の状況"},{id:"P26",desc:"のり肩の状況"},{id:"P27",desc:"フェンスの状況"}
 ]}
 ];
@@ -136,8 +136,8 @@ function renderShoot(){
   document.getElementById('pbar').style.width=Math.round(done/tot*100)+'%';
   document.getElementById('ptxt').textContent=done+' / '+tot+' 枚撮影済み';
   document.getElementById('comp').style.display=done===tot?'block':'none';
-  renderGrid('g-zenkai',site.photos.filter(function(p){return p.id.indexOf('全景')===0;}));
-  renderGrid('g-photos',site.photos.filter(function(p){return p.id.indexOf('全景')!==0;}));
+  renderGrid('g-zenkai',site.photos.filter(function(p){return p.id.indexOf('zen')===0;}));
+  renderGrid('g-photos',site.photos.filter(function(p){return p.id.indexOf('zen')!==0;}));
 }
 function renderGrid(gid,photos){
   var g=document.getElementById(gid);g.innerHTML='';
@@ -178,20 +178,14 @@ function onPhoto(e){
   reader.onload=function(ev){cache[ck]=ev.target.result;renderShoot();};
   reader.readAsDataURL(file);
 
-  // ファイル保存
+  // ファイル保存（直接ダウンロード方式 - 最も安定）
   var renamedFile=new File([file],fn,{type:'image/jpeg'});
-  if(navigator.share&&navigator.canShare&&navigator.canShare({files:[renamedFile]})){
-    navigator.share({files:[renamedFile]})
-      .then(function(){
-        nt.textContent=fn+' を保存しました';ht.textContent='';
-        setTimeout(function(){nt.textContent='';},4000);
-      })
-      .catch(function(){
-        saveFallback(renamedFile,fn,nt,ht);
-      });
-  }else{
-    saveFallback(renamedFile,fn,nt,ht);
-  }
+  var url=URL.createObjectURL(renamedFile);
+  var a=document.createElement('a');a.href=url;a.download=fn;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(url);},5000);
+  nt.textContent=fn+' を保存しました';ht.textContent='ダウンロードフォルダに保存されます';
+  setTimeout(function(){nt.textContent='';ht.textContent='';},6000);
   pendId=null;pendMode=null;
 }
 function saveFallback(f,fn,nt,ht){
