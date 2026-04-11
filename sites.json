@@ -1,0 +1,1585 @@
+[
+  {
+    "name": "特土001",
+    "photos": [
+      {
+        "id": "zen1",
+        "desc": "全景（左）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen2",
+        "desc": "全景（中）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen3",
+        "desc": "全景（右）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1",
+        "desc": "崩壊跡の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2",
+        "desc": "暗渠吞口の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3",
+        "desc": "暗渠吞口の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4-1",
+        "desc": "暗渠吐口の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4-2",
+        "desc": "暗渠吐口の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5",
+        "desc": "管路吞口の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6",
+        "desc": "管路接続部のはずれ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7",
+        "desc": "落石防護網の破損",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8",
+        "desc": "のり尻の落石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-1",
+        "desc": "落石防護柵の破損",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-2",
+        "desc": "落石防護柵の破損",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10",
+        "desc": "管路吐口の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11",
+        "desc": "排水路流末の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12",
+        "desc": "排水路の破損",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19",
+        "desc": "枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P21",
+        "desc": "排水路の閉塞（人為的）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P22",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P23",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P24",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P25",
+        "desc": "のり肩の落石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P26",
+        "desc": "上部斜面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P27",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P28",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P29",
+        "desc": "排水路の破損",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P30",
+        "desc": "落石防護柵の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P31",
+        "desc": "落石防護柵の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P32",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P33",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P34",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P35",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P36",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P37",
+        "desc": "枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P38",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P39",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P40",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      }
+    ]
+  },
+  {
+    "name": "特土002",
+    "photos": [
+      {
+        "id": "zen1",
+        "desc": "全景（左）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen2",
+        "desc": "全景（中）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen3",
+        "desc": "全景（右）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1",
+        "desc": "敷砂の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2",
+        "desc": "吹付の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3",
+        "desc": "擁壁の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4",
+        "desc": "落石防護柵の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5",
+        "desc": "擁壁の錆汁",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6",
+        "desc": "排水路吞口の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-1",
+        "desc": "排水路の落石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-2",
+        "desc": "排水路の落石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-1",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-2",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12-1",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12-2",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13",
+        "desc": "のり肩の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14",
+        "desc": "落石防護網の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15",
+        "desc": "擁壁の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17-1",
+        "desc": "吹付上の落石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17-2",
+        "desc": "吹付の落石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18",
+        "desc": "のり肩の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19-1",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19-2",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20-1",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20-2",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20-3",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P21",
+        "desc": "吹付の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P22-1",
+        "desc": "落石防護網の状況",
+        "taken": false,
+        "panoCount": 0
+      }
+    ]
+  },
+  {
+    "name": "特土003",
+    "photos": [
+      {
+        "id": "zen1",
+        "desc": "全景（左）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen2",
+        "desc": "全景（中）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen3",
+        "desc": "全景（右）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1",
+        "desc": "擁壁の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2-1",
+        "desc": "落石防護柵の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2-2",
+        "desc": "落石防護柵の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3-1",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3-2",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6-1",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6-2",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-1",
+        "desc": "露岩の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-2",
+        "desc": "露岩の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12-1",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12-2",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13",
+        "desc": "のり面の荒廃",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16-1",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16-2",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17-1",
+        "desc": "小段Coの浮き",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17-2",
+        "desc": "小段Coの浮き",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19",
+        "desc": "のり面の小崩壊",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P21",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P22",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P23",
+        "desc": "のり肩の状況",
+        "taken": false,
+        "panoCount": 0
+      }
+    ]
+  },
+  {
+    "name": "特土004",
+    "photos": [
+      {
+        "id": "zen1",
+        "desc": "全景（左）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen2",
+        "desc": "全景（中）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen3",
+        "desc": "全景（右）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11",
+        "desc": "排水路の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18",
+        "desc": "のり面の荒廃",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19-1",
+        "desc": "のり面の表層滑り",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19-2",
+        "desc": "のり面の表層滑りメン",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P21",
+        "desc": "小段Coの割れ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P22",
+        "desc": "のり面の荒廃",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P23",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P24",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P25-1",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P25-2",
+        "desc": "のり面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P26",
+        "desc": "のり肩の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P27",
+        "desc": "フェンスの状況",
+        "taken": false,
+        "panoCount": 0
+      }
+    ]
+  },
+  {
+    "name": "特土005",
+    "photos": [
+      {
+        "id": "zen1",
+        "desc": "全景（左）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen2",
+        "desc": "全景（中）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen3",
+        "desc": "全景（右）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1-1",
+        "desc": "切土の浮石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1-2",
+        "desc": "切土の浮石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2",
+        "desc": "小段の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3",
+        "desc": "のり枠の浸食",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5-1",
+        "desc": "のり枠の浸食",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5-2",
+        "desc": "のり枠の浸食",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6",
+        "desc": "のり枠の浸食",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7",
+        "desc": "のり枠側部の小崩壊",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-1",
+        "desc": "のり枠の浸食",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-2",
+        "desc": "のり枠の浸食",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13",
+        "desc": "のり枠の浸食",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16-1",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16-2",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17-1",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17-2",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18-1",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18-2",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20",
+        "desc": "のり枠の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P21",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P22",
+        "desc": "小段Coの亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P23",
+        "desc": "排水路の閉塞",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P24",
+        "desc": "平坦部の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P25",
+        "desc": "切土の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P26",
+        "desc": "斜面の転石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P27",
+        "desc": "斜面の転石",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P28",
+        "desc": "標識杭",
+        "taken": false,
+        "panoCount": 0
+      }
+    ]
+  },
+  {
+    "name": "特土006",
+    "photos": [
+      {
+        "id": "zen1",
+        "desc": "全景（左）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen2",
+        "desc": "全景（中）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen3",
+        "desc": "全景（右）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7-1",
+        "desc": "法枠工の遊離石灰",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7-2",
+        "desc": "法枠工の遊離石灰",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-1",
+        "desc": "コンクリートの亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-2",
+        "desc": "コンクリートの亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-3",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-4",
+        "desc": "吹付の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-5",
+        "desc": "コンクリートの浮きウ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-6",
+        "desc": "コンクリリートの浮きの処置状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-7",
+        "desc": "コンクリートの浮き処置状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-1",
+        "desc": "擁壁の遊離石灰",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-2",
+        "desc": "擁壁の遊離石灰",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10-1",
+        "desc": "擁壁の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10-2",
+        "desc": "擁壁の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11-1",
+        "desc": "アンカー工 防錆油の漏れ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11-2",
+        "desc": "アンカー工 防錆油の漏れ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12",
+        "desc": "アンカー工からの湧水",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13-1",
+        "desc": "アンカー工 防錆油の漏れ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13-2",
+        "desc": "アンカー工 防錆油の漏れ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14-1",
+        "desc": "アンカ－プレートの錆び　防錆油の漏れサ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14-2",
+        "desc": "アンカ－プレートの錆び　防錆油の漏れ",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15-1",
+        "desc": "水路の枝葉堆積",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15-2",
+        "desc": "水路の枝葉堆積",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16-1",
+        "desc": "水路内の木",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16-2",
+        "desc": "水路内の木",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16-3",
+        "desc": "水路内に生育する木（枝葉の堆積）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17",
+        "desc": "斜面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P19",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P20",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P21",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P22",
+        "desc": "法枠工の亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P23",
+        "desc": "水路工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P24",
+        "desc": "水路の枝葉堆積",
+        "taken": false,
+        "panoCount": 0
+      }
+    ]
+  },
+  {
+    "name": "特土007",
+    "photos": [
+      {
+        "id": "zen1",
+        "desc": "全景（左）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen2",
+        "desc": "全景（中）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "zen3",
+        "desc": "全景（右）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1-1",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P1-2",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2-1",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P2-2",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3-1",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P3-2",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4-1",
+        "desc": "アンカー工の状況（受圧板の遊離石灰）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4-2",
+        "desc": "アンカー工（頭部）の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P4-3",
+        "desc": "アンカー工の状況（受圧板の遊離石灰）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5-1",
+        "desc": "アンカー工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P5-2",
+        "desc": "アンカー工（頭部）の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6-1",
+        "desc": "アンカー工　背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6-2",
+        "desc": "アンカー工　背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P6-3",
+        "desc": "アンカー工　背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7-1",
+        "desc": "アンカー工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P7-2",
+        "desc": "アンカー工（頭部）の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-1",
+        "desc": "法枠工 背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P8-2",
+        "desc": "法枠工 背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-1",
+        "desc": "法枠工 背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P9-2",
+        "desc": "法枠工 背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10-1",
+        "desc": "法枠工 背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P10-2",
+        "desc": "法枠工 背面土砂の流出",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11-1",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P11-2",
+        "desc": "法枠工・鉄筋挿入工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P12",
+        "desc": "法枠工の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13-1",
+        "desc": "落石防護柵の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P13-2",
+        "desc": "落石防護柵　支柱の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P14-1",
+        "desc": "ブロック積み擁壁の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15-1",
+        "desc": "（擁壁に隣接する）コンクリートの亀裂",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P15-2",
+        "desc": "擁壁に隣接するコンクリートの亀裂（隙間）",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P16",
+        "desc": "斜面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P17",
+        "desc": "斜面の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18-1",
+        "desc": "谷出口の状況",
+        "taken": false,
+        "panoCount": 0
+      },
+      {
+        "id": "P18-2",
+        "desc": "谷出口の状況",
+        "taken": false,
+        "panoCount": 0
+      }
+    ]
+  }
+]
