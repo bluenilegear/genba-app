@@ -6,7 +6,7 @@
 <title>現場撮影</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:-apple-system,'Hiragino Sans',sans-serif;background:var(--color-background-tertiary,#f0ede8);}
+body{font-family:-apple-system,'Hiragino Sans',sans-serif;background:#f0ede8;}
 .app{max-width:480px;margin:0 auto;padding:12px 12px 40px;}
 .screen{display:none;}.screen.active{display:block;}
 h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #ddd;color:#1a1a1a;}
@@ -17,15 +17,12 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .back-btn{background:none;border:none;color:#666;font-size:14px;padding:6px 0;margin-bottom:10px;cursor:pointer;display:block;}
 .pw{background:#e0ddd8;border-radius:8px;height:6px;margin-bottom:6px;overflow:hidden;}
 .pb{background:#639922;height:100%;border-radius:8px;transition:width 0.3s;}
-.pt{font-size:12px;color:#666;margin-bottom:14px;}
+.pct{font-size:12px;color:#666;margin-bottom:14px;}
 .sl{font-size:11px;font-weight:600;color:#999;letter-spacing:0.4px;margin:14px 0 8px;}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
 .pc{border:1px solid #ddd;border-radius:12px;background:#f8f8f5;overflow:hidden;}
 .pc.done{background:#EAF3DE;border-color:#97C459;}
-
-
-
-.pm{padding:10px 8px;cursor:pointer;text-align:center;}
+.pm{padding:14px 8px;cursor:pointer;text-align:center;}
 .pm:active{opacity:0.7;}
 .pid{font-size:15px;font-weight:500;color:#1a1a1a;}
 .pc.done .pid{color:#27500A;}
@@ -47,10 +44,6 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .md input{width:100%;margin-bottom:8px;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:14px;}
 .mbt{display:flex;gap:8px;margin-top:12px;}
 .mbt button{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;font-size:14px;}
-.vbg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.92);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;z-index:100;}
-.vi{max-width:100%;max-height:70vh;border-radius:8px;object-fit:contain;}
-.vl{color:#fff;font-size:14px;font-weight:500;margin-top:12px;}
-.vc{color:#aaa;font-size:14px;margin-top:16px;background:none;border:1px solid #555;border-radius:8px;cursor:pointer;padding:8px 24px;}
 input[type=file]{display:none;}
 </style>
 </head>
@@ -64,7 +57,7 @@ input[type=file]{display:none;}
   <button class="back-btn" onclick="goHome()">← 現場一覧</button>
   <h1 id="stitle"></h1>
   <div class="pw"><div class="pb" id="pbar"></div></div>
-  <div class="pt" id="ptxt"></div>
+  <div class="pct" id="ptxt"></div>
   <div id="comp" class="comp" style="display:none">全ての写真を撮影しました！</div>
   <div class="sl">全景写真</div>
   <div class="grid" id="g-zenkai"></div>
@@ -88,13 +81,6 @@ input[type=file]{display:none;}
     </div>
   </div>
 </div>
-<div id="m-view" style="display:none;">
-  <div class="vbg">
-    <img class="vi" id="vimg" src=""/>
-    <div class="vl" id="vlbl"></div>
-    <button class="vc" onclick="closeM('m-view')">閉じる</button>
-  </div>
-</div>
 <input type="file" id="cam" accept="image/*" capture="environment" onchange="onPhoto(event)">
 </div>
 <script>
@@ -112,27 +98,51 @@ var SITES=[
 {id:"P1",desc:"排水路の状況"},{id:"P2",desc:"のり面の状況"},{id:"P3",desc:"排水路の状況"},{id:"P4",desc:"のり面の状況"},{id:"P5",desc:"排水路の状況"},{id:"P6",desc:"排水路の閉塞"},{id:"P7",desc:"のり面の状況"},{id:"P8",desc:"排水路の閉塞"},{id:"P9",desc:"排水路の閉塞"},{id:"P10",desc:"のり面の状況"},{id:"P11",desc:"排水路の状況"},{id:"P12",desc:"のり面の状況"},{id:"P13",desc:"のり面の状況"},{id:"P14",desc:"のり面の状況"},{id:"P15",desc:"排水路の閉塞"},{id:"P16",desc:"のり面の状況"},{id:"P17",desc:"排水路の閉塞"},{id:"P18",desc:"のり面の荒廃"},{id:"P19-1",desc:"のり面の表層滑り"},{id:"P19-2",desc:"のり面の表層滑り"},{id:"P20",desc:"排水路の閉塞"},{id:"P21",desc:"小段Coの割れ"},{id:"P22",desc:"のり面の荒廃"},{id:"P23",desc:"排水路の閉塞"},{id:"P24",desc:"のり面の状況"},{id:"P25-1",desc:"のり面の状況"},{id:"P25-2",desc:"のり面の状況"},{id:"P26",desc:"のり肩の状況"},{id:"P27",desc:"フェンスの状況"}
 ]}
 ];
-var sites=[],cur=null,pendId=null,pendMode=null;
+
+var sites=[], cur=null, pendId=null, pendMode=null;
+
 function load(){
-  try{var s=localStorage.getItem('genba_s2');if(s)sites=JSON.parse(s);else init();}catch(e){init();}
-  SITES.forEach(function(ns){if(!sites.find(function(s){return s.name===ns.name;}))sites.push({name:ns.name,photos:ns.photos.map(function(p){return{id:p.id,desc:p.desc,taken:false,panoCount:0};})});});
+  try{var s=localStorage.getItem('genba_v6');if(s)sites=JSON.parse(s);else init();}catch(e){init();}
+  SITES.forEach(function(ns){
+    if(!sites.find(function(s){return s.name===ns.name;}))
+      sites.push({name:ns.name,photos:ns.photos.map(function(p){return{id:p.id,desc:p.desc,taken:false,panoCount:0};})});
+  });
   save();
 }
-function init(){sites=SITES.map(function(s){return{name:s.name,photos:s.photos.map(function(p){return{id:p.id,desc:p.desc,taken:false,panoCount:0};})};});}
-function save(){try{localStorage.setItem('genba_s2',JSON.stringify(sites.map(function(s){return{name:s.name,photos:s.photos.map(function(p){return{id:p.id,desc:p.desc,taken:p.taken,panoCount:p.panoCount||0};})};}))); }catch(e){}}
-function goHome(){document.getElementById('s-home').classList.add('active');document.getElementById('s-shoot').classList.remove('active');renderHome();}
+function init(){
+  sites=SITES.map(function(s){return{name:s.name,photos:s.photos.map(function(p){return{id:p.id,desc:p.desc,taken:false,panoCount:0};})};});
+}
+function save(){
+  try{localStorage.setItem('genba_v6',JSON.stringify(sites.map(function(s){return{name:s.name,photos:s.photos.map(function(p){return{id:p.id,desc:p.desc,taken:p.taken,panoCount:p.panoCount||0};})};}))); }catch(e){}
+}
+function goHome(){
+  document.getElementById('s-home').classList.add('active');
+  document.getElementById('s-shoot').classList.remove('active');
+  renderHome();
+}
 function renderHome(){
-  var el=document.getElementById('site-list');el.innerHTML='';
+  var el=document.getElementById('site-list'); el.innerHTML='';
   sites.forEach(function(site,i){
-    var tot=site.photos.length,done=site.photos.filter(function(p){return p.taken;}).length,isDone=done===tot;
-    var btn=document.createElement('button');btn.className='site-btn';
+    var tot=site.photos.length;
+    var done=site.photos.filter(function(p){return p.taken;}).length;
+    var isDone=done===tot;
+    var btn=document.createElement('button'); btn.className='site-btn';
     btn.innerHTML='<span>'+site.name+'</span><span class="ptag '+(isDone?'done':'')+'">'+( isDone?'完了':done+' / '+tot+' 枚')+'</span>';
-    btn.onclick=(function(idx){return function(){openSite(idx);};})(i);el.appendChild(btn);
+    btn.onclick=(function(idx){return function(){openSite(idx);};})(i);
+    el.appendChild(btn);
   });
 }
-function openSite(i){cur=i;document.getElementById('stitle').textContent=sites[i].name;document.getElementById('s-home').classList.remove('active');document.getElementById('s-shoot').classList.add('active');renderShoot();}
+function openSite(i){
+  cur=i;
+  document.getElementById('stitle').textContent=sites[i].name;
+  document.getElementById('s-home').classList.remove('active');
+  document.getElementById('s-shoot').classList.add('active');
+  renderShoot();
+}
 function renderShoot(){
-  var site=sites[cur],tot=site.photos.length,done=site.photos.filter(function(p){return p.taken;}).length;
+  var site=sites[cur];
+  var tot=site.photos.length;
+  var done=site.photos.filter(function(p){return p.taken;}).length;
   document.getElementById('pbar').style.width=Math.round(done/tot*100)+'%';
   document.getElementById('ptxt').textContent=done+' / '+tot+' 枚撮影済み';
   document.getElementById('comp').style.display=done===tot?'block':'none';
@@ -140,55 +150,53 @@ function renderShoot(){
   renderGrid('g-photos',site.photos.filter(function(p){return p.id.indexOf('zen')!==0;}));
 }
 function renderGrid(gid,photos){
-  var g=document.getElementById(gid);g.innerHTML='';
+  var g=document.getElementById(gid); g.innerHTML='';
   photos.forEach(function(p){
-    var card=document.createElement('div');card.className='pc'+(p.taken?' done':'');
+    var card=document.createElement('div');
+    card.className='pc'+(p.taken?' done':'');
     var ptxt=p.panoCount>0?' Pano×'+p.panoCount:'';
     var html='';
-    html+='<div class="pm" onclick="shoot(''+p.id+'','normal')"><div class="pid">'+p.id+' <span class="chk">✓</span></div><div class="pdesc">'+p.desc+ptxt+'</div></div>';
-    html+='<div class="pa"><button class="panobtn" onclick="shoot(''+p.id+'','pano')">Pano追加</button></div>';
-    card.innerHTML=html;g.appendChild(card);
+    html+='<div class="pm" onclick="shoot(\''+p.id+'\',\'normal\')"><div class="pid">'+p.id+' <span class="chk">✓</span></div><div class="pdesc">'+p.desc+ptxt+'</div></div>';
+    html+='<div class="pa"><button class="panobtn" onclick="shoot(\''+p.id+'\',\'pano\')">Pano追加</button></div>';
+    card.innerHTML=html;
+    g.appendChild(card);
   });
 }
-function shoot(id,mode){pendId=id;pendMode=mode;var c=document.getElementById('cam');c.value='';c.click();}
-function toBlob(d){var a=d.split(','),m=a[0].match(/:(.*?);/)[1],b=atob(a[1]),n=b.length,u=new Uint8Array(n);while(n--)u[n]=b.charCodeAt(n);return new Blob([u],{type:m});}
+function shoot(id,mode){
+  pendId=id; pendMode=mode;
+  var c=document.getElementById('cam'); c.value=''; c.click();
+}
 function onPhoto(e){
-  var file=e.target.files[0];if(!file||!pendId)return;
-  var photo=sites[cur].photos.find(function(p){return p.id===pendId;});if(!photo)return;
+  var file=e.target.files[0]; if(!file||!pendId)return;
+  var photo=sites[cur].photos.find(function(p){return p.id===pendId;}); if(!photo)return;
   var sn=sites[cur].name;
-  var fn,ck;
+  var fn;
   if(pendMode==='pano'){
     photo.panoCount=(photo.panoCount||0)+1;
     photo.taken=true;
     fn=sn+'_'+pendId+'-pano'+photo.panoCount+'.jpg';
-    ck=sn+'_'+pendId+'_p'+photo.panoCount;
   }else{
     photo.taken=true;
     fn=sn+'_'+pendId+'.jpg';
-    ck=sn+'_'+pendId;
   }
   save();
-
-  var nt=document.getElementById('notice'),ht=document.getElementById('hint');
-
-  // 緑チェックを更新
   renderShoot();
-
-  // 保存処理
+  var nt=document.getElementById('notice'), ht=document.getElementById('hint');
   var renamedFile=new File([file],fn,{type:'image/jpeg'});
   var url=URL.createObjectURL(renamedFile);
-  var a=document.createElement('a');
-  a.href=url;a.download=fn;
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  var a=document.createElement('a'); a.href=url; a.download=fn;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(function(){URL.revokeObjectURL(url);},5000);
   nt.textContent=fn+' を保存しました';
   ht.textContent='ダウンロードフォルダに保存されます';
-  setTimeout(function(){nt.textContent='';ht.textContent='';},6000);
-  pendId=null;pendMode=null;
+  setTimeout(function(){nt.textContent=''; ht.textContent='';},6000);
+  pendId=null; pendMode=null;
 }
-
-function viewPhoto(k,lbl){var img=cache[k];if(!img){alert('写真データがありません。');return;}document.getElementById('vimg').src=img;document.getElementById('vlbl').textContent=lbl;document.getElementById('m-view').style.display='block';}
-function showAdd(){document.getElementById('m-pid').value='';document.getElementById('m-desc').value='';document.getElementById('m-add').style.display='block';}
+function showAdd(){
+  document.getElementById('m-pid').value='';
+  document.getElementById('m-desc').value='';
+  document.getElementById('m-add').style.display='block';
+}
 function closeM(id){document.getElementById(id).style.display='none';}
 function doAdd(){
   var pid=document.getElementById('m-pid').value.trim().toUpperCase();
@@ -196,15 +204,14 @@ function doAdd(){
   if(!pid){alert('P番号を入力してください。');return;}
   if(sites[cur].photos.find(function(p){return p.id===pid;})){alert('そのP番号は既に存在します。');return;}
   sites[cur].photos.push({id:pid,desc:desc||'追加箇所',taken:false,panoCount:0});
-  save();closeM('m-add');renderShoot();
+  save(); closeM('m-add'); renderShoot();
 }
 function resetSite(){
   if(!confirm('撮影記録をリセットしますか？'))return;
-  var sn=sites[cur].name;sites[cur].photos.forEach(function(p){p.taken=false;p.panoCount=0;});
-  Object.keys(cache).forEach(function(k){if(k.indexOf(sn+'_')===0)delete cache[k];});
-  save();renderShoot();
+  sites[cur].photos.forEach(function(p){p.taken=false;p.panoCount=0;});
+  save(); renderShoot();
 }
-load();renderHome();
+load(); renderHome();
 </script>
 </body>
 </html>
