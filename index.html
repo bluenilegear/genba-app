@@ -142,14 +142,11 @@ function renderShoot(){
 function renderGrid(gid,photos){
   var g=document.getElementById(gid);g.innerHTML='';
   photos.forEach(function(p){
-    var sn=sites[cur].name;
     var card=document.createElement('div');card.className='pc'+(p.taken?' done':'');
-    var html='';
-    if(hasM)html+='<img class="thumb" src="'+cache[mk]+'" onclick="viewPhoto(\''+mk+'\',\''+p.id+'\')">';
-    if(panos.length){html+='<div class="pr">';panos.forEach(function(x){html+='<img class="pt2" src="'+cache[x.k]+'" onclick="viewPhoto(\''+x.k+'\',\''+p.id+'-pano'+x.i+'\')">';});html+='</div>';}
     var ptxt=p.panoCount>0?' Pano×'+p.panoCount:'';
-    html+='<div class="pm" onclick="shoot(\''+p.id+'\',\'normal\')"><div class="pid">'+p.id+' <span class="chk">✓</span></div><div class="pdesc">'+p.desc+ptxt+'</div></div>';
-    html+='<div class="pa"><button class="panobtn" onclick="shoot(\''+p.id+'\',\'pano\')">Pano追加</button></div>';
+    var html='';
+    html+='<div class="pm" onclick="shoot(''+p.id+'','normal')"><div class="pid">'+p.id+' <span class="chk">✓</span></div><div class="pdesc">'+p.desc+ptxt+'</div></div>';
+    html+='<div class="pa"><button class="panobtn" onclick="shoot(''+p.id+'','pano')">Pano追加</button></div>';
     card.innerHTML=html;g.appendChild(card);
   });
 }
