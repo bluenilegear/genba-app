@@ -33,12 +33,23 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .panobtn{flex:1;padding:7px 4px;font-size:11px;font-weight:500;color:#185FA5;background:#fff;border:none;cursor:pointer;}
 .panobtn:active{background:#f0f0f0;}
 .pc.done .panobtn{background:#EAF3DE;}
+.pc.all-done{background:#E3F2FD;border-color:#64B5F6;}
+.pc.all-done .pid{color:#0D47A1;}
+.pc.all-done .pdesc{color:#1565C0;}
+.pc.all-done .chk{display:inline;color:#0D47A1;}
+.pc.all-done .panobtn{background:#E3F2FD;}
+.pc.confirming{background:#FFF9C4;border-color:#F9A825;border-width:2px;}
+.pc.confirming .pid{color:#E65100;}
+.confirm-bar{display:flex;border-top:1px solid #F9A825;background:#FFF9C4;}
+.confirm-yes{flex:1;padding:10px 4px;font-size:13px;font-weight:600;color:#fff;background:#43A047;border:none;cursor:pointer;}
+.confirm-no{flex:1;padding:10px 4px;font-size:13px;font-weight:600;color:#fff;background:#E53935;border:none;cursor:pointer;border-left:1px solid #F9A825;}
+.confirm-yes:active{opacity:0.8;}
+.confirm-no:active{opacity:0.8;}
 .comp{background:#EAF3DE;border:1px solid #97C459;border-radius:12px;padding:14px;text-align:center;margin-bottom:14px;color:#27500A;font-weight:500;font-size:14px;}
 .addbtn{width:100%;padding:12px;background:#fff;border:1px solid #ccc;border-radius:12px;font-size:14px;color:#666;cursor:pointer;margin-top:8px;}
 .rstbtn{width:100%;padding:12px;background:#fff;color:#c0392b;border:1px solid #ffb3b3;border-radius:12px;font-size:14px;cursor:pointer;margin-top:8px;}
 .notice{font-size:12px;color:#27500A;text-align:center;margin-top:10px;min-height:18px;font-weight:500;}
 .hint{font-size:11px;color:#999;text-align:center;margin-top:4px;line-height:1.6;min-height:16px;}
-.loading{text-align:center;padding:40px;color:#999;font-size:14px;}
 .mbg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:100;}
 .md{background:#fff;border-radius:12px;padding:20px;width:90%;max-width:320px;}
 .md h3{font-size:15px;font-weight:500;margin-bottom:12px;color:#1a1a1a;}
@@ -52,7 +63,7 @@ input[type=file]{display:none;}
 <div class="app">
 <div class="screen active" id="s-home">
   <h1>現場撮影</h1>
-  <div id="site-list"><div class="loading">読み込み中...</div></div>
+  <div id="site-list"></div>
 </div>
 <div class="screen" id="s-shoot">
   <button class="back-btn" onclick="goHome()">← 現場一覧</button>
@@ -85,48 +96,36 @@ input[type=file]{display:none;}
 <input type="file" id="cam" accept="image/*" capture="environment" onchange="onPhoto(event)">
 </div>
 <script>
+var SITES=[
+{name:"特土002",photos:[
+{id:"zen1",desc:"全景（左）"},{id:"zen2",desc:"全景（中）"},{id:"zen3",desc:"全景（右）"},
+{id:"P1",desc:"敷砂の状況"},{id:"P2",desc:"吹付の状況"},{id:"P3",desc:"擁壁の状況"},{id:"P4",desc:"落石防護柵の状況"},{id:"P5",desc:"擁壁の錆汁"},{id:"P6",desc:"排水路吞口の状況"},{id:"P7",desc:"排水路の状況"},{id:"P8-1",desc:"排水路の落石"},{id:"P8-2",desc:"排水路の落石"},{id:"P9-1",desc:"排水路の状況"},{id:"P9-2",desc:"排水路の状況"},{id:"P10",desc:"排水路の状況"},{id:"P11",desc:"吹付の亀裂"},{id:"P12-1",desc:"吹付の亀裂"},{id:"P12-2",desc:"吹付の亀裂"},{id:"P13",desc:"のり肩の状況"},{id:"P14",desc:"落石防護網の状況"},{id:"P15",desc:"擁壁の状況"},{id:"P16",desc:"吹付の亀裂"},{id:"P17-1",desc:"吹付上の落石"},{id:"P17-2",desc:"吹付の落石"},{id:"P18",desc:"のり肩の状況"},{id:"P19-1",desc:"吹付の亀裂"},{id:"P19-2",desc:"吹付の亀裂"},{id:"P20-1",desc:"吹付の亀裂"},{id:"P20-2",desc:"吹付の亀裂"},{id:"P20-3",desc:"吹付の亀裂"},{id:"P21",desc:"吹付の状況"},{id:"P22-1",desc:"落石防護網の状況"}
+]},
+{name:"特土003",photos:[
+{id:"zen1",desc:"全景（左）"},{id:"zen2",desc:"全景（中）"},{id:"zen3",desc:"全景（右）"},
+{id:"P1",desc:"擁壁の状況"},{id:"P2-1",desc:"落石防護柵の状況"},{id:"P2-2",desc:"落石防護柵の状況"},{id:"P3-1",desc:"排水路の状況"},{id:"P3-2",desc:"排水路の状況"},{id:"P4",desc:"排水路の閉塞"},{id:"P5",desc:"排水路の閉塞"},{id:"P6-1",desc:"のり面の状況"},{id:"P6-2",desc:"のり面の状況"},{id:"P7",desc:"排水路の閉塞"},{id:"P8",desc:"のり面の状況"},{id:"P9-1",desc:"露岩の状況"},{id:"P9-2",desc:"露岩の状況"},{id:"P10",desc:"排水路の閉塞"},{id:"P11",desc:"のり面の状況"},{id:"P12-1",desc:"排水路の閉塞"},{id:"P12-2",desc:"排水路の閉塞"},{id:"P13",desc:"のり面の荒廃"},{id:"P14",desc:"排水路の閉塞"},{id:"P15",desc:"排水路の閉塞"},{id:"P16-1",desc:"のり面の状況"},{id:"P16-2",desc:"のり面の状況"},{id:"P17-1",desc:"小段Coの浮き"},{id:"P17-2",desc:"小段Coの浮き"},{id:"P18",desc:"のり面の状況"},{id:"P19",desc:"のり面の小崩壊"},{id:"P20",desc:"のり面の状況"},{id:"P21",desc:"排水路の閉塞"},{id:"P22",desc:"のり面の状況"},{id:"P23",desc:"のり肩の状況"}
+]},
+{name:"特土004",photos:[
+{id:"zen1",desc:"全景（左）"},{id:"zen2",desc:"全景（中）"},{id:"zen3",desc:"全景（右）"},
+{id:"P1",desc:"排水路の状況"},{id:"P2",desc:"のり面の状況"},{id:"P3",desc:"排水路の状況"},{id:"P4",desc:"のり面の状況"},{id:"P5",desc:"排水路の状況"},{id:"P6",desc:"排水路の閉塞"},{id:"P7",desc:"のり面の状況"},{id:"P8",desc:"排水路の閉塞"},{id:"P9",desc:"排水路の閉塞"},{id:"P10",desc:"のり面の状況"},{id:"P11",desc:"排水路の状況"},{id:"P12",desc:"のり面の状況"},{id:"P13",desc:"のり面の状況"},{id:"P14",desc:"のり面の状況"},{id:"P15",desc:"排水路の閉塞"},{id:"P16",desc:"のり面の状況"},{id:"P17",desc:"排水路の閉塞"},{id:"P18",desc:"のり面の荒廃"},{id:"P19-1",desc:"のり面の表層滑り"},{id:"P19-2",desc:"のり面の表層滑り"},{id:"P20",desc:"排水路の閉塞"},{id:"P21",desc:"小段Coの割れ"},{id:"P22",desc:"のり面の荒廃"},{id:"P23",desc:"排水路の閉塞"},{id:"P24",desc:"のり面の状況"},{id:"P25-1",desc:"のり面の状況"},{id:"P25-2",desc:"のり面の状況"},{id:"P26",desc:"のり肩の状況"},{id:"P27",desc:"フェンスの状況"}
+]}
+];
+
 var sites=[], cur=null, pendId=null, pendMode=null;
 
-// sites.jsonを読み込んでからlocalStorageと統合
-fetch('sites.json?v='+Date.now())
-  .then(function(r){return r.json();})
-  .then(function(SITES){
-    // localStorageから保存済み状態を読み込む
-    var saved={};
-    try{
-      var s=localStorage.getItem('genba_state');
-      if(s) saved=JSON.parse(s);
-    }catch(e){}
-
-    // SITESデータと保存状態をマージ
-    sites=SITES.map(function(ns){
-      var savedSite=saved[ns.name]||{};
-      return {
-        name:ns.name,
-        photos:ns.photos.map(function(p){
-          var sp=savedSite[p.id]||{};
-          return {id:p.id,desc:p.desc,taken:sp.taken||false,panoCount:sp.panoCount||0};
-        })
-      };
-    });
-    renderHome();
-  })
-  .catch(function(){
-    document.getElementById('site-list').innerHTML='<div class="loading">データの読み込みに失敗しました。<br>ネット接続を確認してください。</div>';
+function load(){
+  try{var s=localStorage.getItem('genba_v6');if(s)sites=JSON.parse(s);else init();}catch(e){init();}
+  SITES.forEach(function(ns){
+    if(!sites.find(function(s){return s.name===ns.name;}))
+      sites.push({name:ns.name,photos:ns.photos.map(function(p){return{id:p.id,desc:p.desc,taken:false,panoCount:0};})});
   });
-
+  save();
+}
+function init(){
+  sites=SITES.map(function(s){return{name:s.name,photos:s.photos.map(function(p){return{id:p.id,desc:p.desc,taken:false,panoCount:0};})};});
+}
 function save(){
-  try{
-    var state={};
-    sites.forEach(function(site){
-      state[site.name]={};
-      site.photos.forEach(function(p){
-        if(p.taken||p.panoCount>0)
-          state[site.name][p.id]={taken:p.taken,panoCount:p.panoCount};
-      });
-    });
-    localStorage.setItem('genba_state',JSON.stringify(state));
-  }catch(e){}
+  try{localStorage.setItem('genba_v6',JSON.stringify(sites.map(function(s){return{name:s.name,photos:s.photos.map(function(p){return{id:p.id,desc:p.desc,taken:p.taken,panoCount:p.panoCount||0,confirming:p.confirming||false};})};}))); }catch(e){}
 }
 function goHome(){
   document.getElementById('s-home').classList.add('active');
@@ -156,11 +155,12 @@ function renderShoot(){
   var site=sites[cur];
   var tot=site.photos.length;
   var done=site.photos.filter(function(p){return p.taken;}).length;
+  var allDone=done===tot;
   document.getElementById('pbar').style.width=Math.round(done/tot*100)+'%';
   document.getElementById('ptxt').textContent=done+' / '+tot+' 枚撮影済み';
-  document.getElementById('comp').style.display=done===tot?'block':'none';
-  renderGrid('g-zenkai',site.photos.filter(function(p){return p.id.indexOf('zen')===0;}));
-  renderGrid('g-photos',site.photos.filter(function(p){return p.id.indexOf('zen')!==0;}));
+  document.getElementById('comp').style.display=allDone?'block':'none';
+  renderGrid('g-zenkai',site.photos.filter(function(p){return p.id.indexOf('zen')===0;}),allDone);
+  renderGrid('g-photos',site.photos.filter(function(p){return p.id.indexOf('zen')!==0;}),allDone);
 }
 function renderGrid(gid,photos){
   var g=document.getElementById(gid); g.innerHTML='';
@@ -186,24 +186,31 @@ function onPhoto(e){
   var fn;
   if(pendMode==='pano'){
     photo.panoCount=(photo.panoCount||0)+1;
-    photo.taken=true;
     fn=sn+'_'+pendId+'-pano'+photo.panoCount+'.jpg';
   }else{
-    photo.taken=true;
     fn=sn+'_'+pendId+'.jpg';
   }
-  save();
-  renderShoot();
-  var nt=document.getElementById('notice'), ht=document.getElementById('hint');
   var renamedFile=new File([file],fn,{type:'image/jpeg'});
   var url=URL.createObjectURL(renamedFile);
   var a=document.createElement('a'); a.href=url; a.download=fn;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(function(){URL.revokeObjectURL(url);},5000);
-  nt.textContent=fn+' を保存しました';
-  ht.textContent='ダウンロードフォルダに保存されます';
-  setTimeout(function(){nt.textContent=''; ht.textContent='';},6000);
+  // 確認待ち状態にする
+  photo.confirming=true;
+  photo.confirmFn=fn;
+  renderShoot();
   pendId=null; pendMode=null;
+}
+function confirmSaved(pid, yes){
+  var photo=sites[cur].photos.find(function(p){return p.id===pid;});
+  if(!photo)return;
+  if(yes){
+    photo.taken=true;
+  }
+  photo.confirming=false;
+  photo.confirmFn=null;
+  save();
+  renderShoot();
 }
 function showAdd(){
   document.getElementById('m-pid').value='';
@@ -224,6 +231,7 @@ function resetSite(){
   sites[cur].photos.forEach(function(p){p.taken=false;p.panoCount=0;});
   save(); renderShoot();
 }
+load(); renderHome();
 </script>
 </body>
 </html>
