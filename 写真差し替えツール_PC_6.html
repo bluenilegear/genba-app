@@ -241,7 +241,7 @@ async function loadExcel(e) {
       const tgtM = tag.match(/Target="[^"]*\/(image\d+\.[^"]+)"/);
       if (idM && tgtM) relEntries.push({rid:idM[1], media:`xl/media/${tgtM[1]}`});
     }
-    relEntries.sort((a,b) => parseInt(a.rid.replace(/\D/g,'')) - parseInt(b.rid.replace(/\D/g,'')));
+    relEntries.sort(function(a,b){var na=parseInt(a.rid.replace(/[^0-9]/g,''));var nb=parseInt(b.rid.replace(/[^0-9]/g,''));return na-nb;});
     const ridToMedia = Object.fromEntries(relEntries.map(e=>[e.rid,e.media]));
 
     const anchors = [...drawingXml.matchAll(/<xdr:twoCellAnchor[\s\S]*?<\/xdr:twoCellAnchor>/g)];
@@ -476,7 +476,7 @@ async function executeReplace() {
       const tgtM=tag.match(/Target="[^"]*\/(image\d+\.[^"]+)"/);
       if(idM&&tgtM) relEntries.push({rid:idM[1],media:`xl/media/${tgtM[1]}`});
     }
-    relEntries.sort((a,b)=>parseInt(a.rid.replace(/\D/g,''))-parseInt(b.rid.replace(/\D/g,'')));
+    relEntries.sort(function(a,b){var na=parseInt(a.rid.replace(/[^0-9]/g,''));var nb=parseInt(b.rid.replace(/[^0-9]/g,''));return na-nb;});
     const ridToMedia = Object.fromEntries(relEntries.map(e=>[e.rid,e.media]));
 
     for (const p of sheet.photos) {
