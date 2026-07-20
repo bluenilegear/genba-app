@@ -280,7 +280,7 @@ input[type=file]{display:none;}
   </div>
   <!-- 右カラム（ボタン） -->
   <div class="land-right">
-    <button class="save-btn" onclick="doSave()">💾 保存する</button>
+    <a id="save-link" class="save-btn" style="display:flex;align-items:center;justify-content:center;text-decoration:none;" onclick="onSaveTap()">💾 保存する</a>
     <button class="cancel-photo-btn" onclick="cancelPhoto()">撮り直す</button>
   </div>
 </div>
@@ -458,7 +458,14 @@ function onPhoto(e) {
   if (pendingObjectUrl) URL.revokeObjectURL(pendingObjectUrl);
   pendingObjectUrl = URL.createObjectURL(file);
 
-  // まず未保存としてログに追加
+  // 保存リンク（aタグ）にhref/downloadをセット
+  var renamedFile = new File([file], fn, {type:'image/jpeg'});
+  var dlUrl = URL.createObjectURL(renamedFile);
+  var saveLink = document.getElementById('save-link');
+  saveLink.href = dlUrl;
+  saveLink.setAttribute('download', fn);
+
+  // 未保存としてログに追加
   var now = new Date();
   var timeStr = now.getHours() + ':' + pad2(now.getMinutes());
   k.photos.push({ filename: fn.replace('.jpg',''), time: timeStr, saved: false });
@@ -471,25 +478,18 @@ function onPhoto(e) {
   showScreen('s-preview');
 }
 
-function doSave() {
+function onSaveTap() {
   if (!pendingFile) return;
   var k = kashoList[curKashoIdx];
-  // 最後の写真（今撮ったもの）をsaved:trueに
   if (k.photos.length > 0) {
-    k.photos[k.photos.length - 1].saved = true;
+    k.photos[k.photos.length-1].saved = true;
   }
   saveState();
-
-  var renamedFile = new File([pendingFile], pendingFilename, {type:'image/jpeg'});
-  var url = URL.createObjectURL(renamedFile);
-  var a = document.createElement('a');
-  a.href = url; a.download = pendingFilename;
-  document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-
   pendingFile = null; pendingFilename = '';
-  updateShootScreen();
-  showScreen('s-shoot');
+  setTimeout(function(){
+    updateShootScreen();
+    showScreen('s-shoot');
+  }, 800);
 }
 
 function cancelPhoto() {
