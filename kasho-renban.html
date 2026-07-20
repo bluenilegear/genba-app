@@ -44,8 +44,17 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .photo-item-name{font-weight:500;}
 .photo-item-time{font-size:11px;color:#aaa;}
 .empty-log{text-align:center;color:#bbb;font-size:12px;padding:10px 0;}
-.notice{font-size:12px;color:#27500A;text-align:center;margin-top:10px;min-height:18px;font-weight:500;}
-.hint{font-size:11px;color:#999;text-align:center;margin-top:4px;line-height:1.6;min-height:16px;}
+.rstbtn{width:100%;padding:10px;background:#fff;color:#c0392b;border:1px solid #ffb3b3;border-radius:12px;font-size:13px;cursor:pointer;margin-top:6px;}
+.next-fn-preview{background:#f0f8e8;border:1px solid #97C459;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#27500A;}
+.next-fn-preview span{font-weight:700;font-size:15px;}
+/* 保存確認画面 */
+.save-area{background:#fff;border:1px solid #ddd;border-radius:12px;padding:14px;margin-bottom:14px;text-align:center;}
+.save-area-label{font-size:11px;font-weight:600;color:#999;letter-spacing:0.4px;margin-bottom:10px;}
+.save-thumb{width:100%;max-height:260px;object-fit:contain;border-radius:8px;background:#f0ede8;display:block;margin:0 auto 12px;}
+.save-filename{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:4px;}
+.save-btn{width:100%;padding:22px;background:#1a6fcf;color:#fff;border:none;border-radius:16px;font-size:20px;font-weight:700;cursor:pointer;margin-bottom:10px;letter-spacing:1px;}
+.save-btn:active{background:#1459a8;}
+.save-skip{width:100%;padding:12px;background:#fff;color:#999;border:1px solid #ddd;border-radius:12px;font-size:14px;cursor:pointer;}
 /* モーダル */
 .mbg{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:100;}
 .md{background:#fff;border-radius:12px;padding:20px;width:90%;max-width:320px;}
@@ -55,10 +64,6 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .mbt button{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;font-size:14px;}
 .mbt button.primary{background:#639922;color:#fff;border-color:#639922;}
 input[type=file]{display:none;}
-/* リセットボタン */
-.rstbtn{width:100%;padding:10px;background:#fff;color:#c0392b;border:1px solid #ffb3b3;border-radius:12px;font-size:13px;cursor:pointer;margin-top:6px;}
-.next-fn-preview{background:#f0f8e8;border:1px solid #97C459;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;color:#27500A;}
-.next-fn-preview span{font-weight:700;font-size:15px;}
 </style>
 </head>
 <body>
@@ -67,7 +72,7 @@ input[type=file]{display:none;}
 <!-- ホーム: 現場名設定 + 箇所番号一覧 -->
 <div class="screen active" id="s-home">
   <h1>現場撮影</h1>
-  <div class="genba-name-area" id="genba-name-area">
+  <div class="genba-name-area">
     <label>現場名</label>
     <div id="genba-name-set">
       <div class="genba-name-row">
@@ -96,17 +101,30 @@ input[type=file]{display:none;}
     <div class="kasho-header-num" id="shoot-kasho-num"></div>
     <div class="kasho-header-sub" id="shoot-kasho-sub"></div>
   </div>
-  <div class="next-fn-preview" id="next-fn-preview">
+  <div class="next-fn-preview">
     次の写真名: <span id="next-fn-text">-</span>
   </div>
   <button class="shoot-btn" onclick="doShoot()">📷 撮影する</button>
-  <div class="photo-log" id="photo-log-area">
+  <div class="photo-log">
     <div class="photo-log-title">撮影済み（この箇所）</div>
     <div id="photo-log-list"><div class="empty-log">まだ撮影していません</div></div>
   </div>
   <button class="rstbtn" onclick="resetKasho()">この箇所をリセット</button>
-  <div class="notice" id="notice"></div>
-  <div class="hint" id="hint"></div>
+</div>
+
+<!-- 保存確認画面 -->
+<div class="screen" id="s-save">
+  <div class="kasho-header">
+    <div class="kasho-header-num" id="save-kasho-num"></div>
+    <div class="kasho-header-sub">この写真を保存しますか？</div>
+  </div>
+  <div class="save-area">
+    <div class="save-area-label">プレビュー</div>
+    <img id="save-thumb" class="save-thumb" src="" alt="プレビュー"/>
+    <div class="save-filename" id="save-filename"></div>
+  </div>
+  <button class="save-btn" onclick="doSave()">💾 保存する</button>
+  <button class="save-skip" onclick="skipSave()">撮り直す（保存しない）</button>
 </div>
 
 <!-- 箇所番号追加モーダル -->
@@ -127,37 +145,27 @@ input[type=file]{display:none;}
 </div>
 
 <script>
-// --- State ---
 var genbaName = '';
-var kashoList = []; 
-// kashoList: [{num:'01', photos:[{filename:'岡山01-01', time:'...'}]}, ...]
+var kashoList = [];
 var curKashoIdx = null;
+var pendingFile = null;
+var pendingFilename = '';
+var pendingObjectUrl = '';
 
-// --- LocalStorage ---
 function loadState() {
   try {
     var s = localStorage.getItem('genba_v2');
-    if (s) {
-      var d = JSON.parse(s);
-      genbaName = d.genbaName || '';
-      kashoList = d.kashoList || [];
-    }
+    if (s) { var d = JSON.parse(s); genbaName = d.genbaName||''; kashoList = d.kashoList||[]; }
   } catch(e) {}
 }
 function saveState() {
-  try {
-    localStorage.setItem('genba_v2', JSON.stringify({genbaName:genbaName, kashoList:kashoList}));
-  } catch(e) {}
+  try { localStorage.setItem('genba_v2', JSON.stringify({genbaName:genbaName,kashoList:kashoList})); } catch(e) {}
 }
 
-// --- 現場名 ---
 function setGenbaName() {
   var v = document.getElementById('genba-input').value.trim();
   if (!v) { alert('現場名を入力してください。'); return; }
-  genbaName = v;
-  saveState();
-  showGenbaName();
-  renderKashoSection();
+  genbaName = v; saveState(); showGenbaName(); renderKashoSection();
 }
 function showGenbaName() {
   document.getElementById('genba-name-set').style.display = 'none';
@@ -170,18 +178,17 @@ function editGenbaName() {
   document.getElementById('genba-name-display').style.display = 'none';
 }
 
-// --- 箇所番号一覧 ---
 function renderKashoSection() {
   var sec = document.getElementById('kasho-section');
-  if (!genbaName) { sec.style.display = 'none'; return; }
+  if (!genbaName) { sec.style.display='none'; return; }
   sec.style.display = 'block';
   var el = document.getElementById('kasho-list');
   el.innerHTML = '';
-  kashoList.forEach(function(k, i) {
+  kashoList.forEach(function(k,i) {
     var card = document.createElement('div');
     var cnt = k.photos.length;
-    card.className = 'kasho-card' + (cnt > 0 ? ' has-photos' : '');
-    card.innerHTML = '<div class="kasho-inner"><div class="kasho-num">' + genbaName + k.num + '</div><div class="kasho-count">' + (cnt > 0 ? cnt + '枚撮影済み' : '未撮影') + '</div></div>';
+    card.className = 'kasho-card'+(cnt>0?' has-photos':'');
+    card.innerHTML = '<div class="kasho-inner"><div class="kasho-num">'+genbaName+k.num+'</div><div class="kasho-count">'+(cnt>0?cnt+'枚撮影済み':'未撮影')+'</div></div>';
     card.onclick = (function(idx){ return function(){ openKasho(idx); }; })(i);
     el.appendChild(card);
   });
@@ -189,49 +196,34 @@ function renderKashoSection() {
 
 function openKasho(i) {
   curKashoIdx = i;
-  var k = kashoList[i];
-  var nextNum = k.photos.length + 1;
-  var nextFn = genbaName + k.num + '-' + pad2(nextNum);
-  document.getElementById('shoot-kasho-num').textContent = genbaName + k.num;
-  document.getElementById('shoot-kasho-sub').textContent = '枝番は ' + pad2(nextNum) + ' から続きます';
-  document.getElementById('next-fn-text').textContent = nextFn + '.jpg';
-  renderPhotoLog(k);
-  document.getElementById('s-home').classList.remove('active');
-  document.getElementById('s-shoot').classList.add('active');
-  clearNotice();
-}
-
-function renderPhotoLog(k) {
-  var el = document.getElementById('photo-log-list');
-  if (k.photos.length === 0) {
-    el.innerHTML = '<div class="empty-log">まだ撮影していません</div>';
-    return;
-  }
-  el.innerHTML = '';
-  // 新しい順に表示
-  var arr = k.photos.slice().reverse();
-  arr.forEach(function(p) {
-    var item = document.createElement('div');
-    item.className = 'photo-item';
-    item.innerHTML = '<span class="photo-item-name">' + p.filename + '.jpg</span><span class="photo-item-time">' + p.time + '</span>';
-    el.appendChild(item);
-  });
+  updateShootScreen();
+  showScreen('s-shoot');
 }
 
 function updateShootScreen() {
   var k = kashoList[curKashoIdx];
   var nextNum = k.photos.length + 1;
   var nextFn = genbaName + k.num + '-' + pad2(nextNum);
+  document.getElementById('shoot-kasho-num').textContent = genbaName + k.num;
   document.getElementById('shoot-kasho-sub').textContent = '枝番は ' + pad2(nextNum) + ' から続きます';
   document.getElementById('next-fn-text').textContent = nextFn + '.jpg';
   renderPhotoLog(k);
 }
 
-// --- 撮影 ---
+function renderPhotoLog(k) {
+  var el = document.getElementById('photo-log-list');
+  if (k.photos.length === 0) { el.innerHTML='<div class="empty-log">まだ撮影していません</div>'; return; }
+  el.innerHTML = '';
+  k.photos.slice().reverse().forEach(function(p) {
+    var item = document.createElement('div');
+    item.className = 'photo-item';
+    item.innerHTML = '<span class="photo-item-name">'+p.filename+'.jpg</span><span class="photo-item-time">'+p.time+'</span>';
+    el.appendChild(item);
+  });
+}
+
 function doShoot() {
-  var c = document.getElementById('cam');
-  c.value = '';
-  c.click();
+  var c = document.getElementById('cam'); c.value=''; c.click();
 }
 
 function onPhoto(e) {
@@ -240,78 +232,84 @@ function onPhoto(e) {
   var k = kashoList[curKashoIdx];
   var nextNum = k.photos.length + 1;
   var fn = genbaName + k.num + '-' + pad2(nextNum);
+  // ファイルを保持しておく（まだ保存しない）
+  pendingFile = file;
+  pendingFilename = fn + '.jpg';
+  if (pendingObjectUrl) URL.revokeObjectURL(pendingObjectUrl);
+  pendingObjectUrl = URL.createObjectURL(file);
+  // 保存確認画面へ
+  document.getElementById('save-kasho-num').textContent = genbaName + k.num;
+  document.getElementById('save-thumb').src = pendingObjectUrl;
+  document.getElementById('save-filename').textContent = pendingFilename;
+  showScreen('s-save');
+}
+
+function doSave() {
+  if (!pendingFile || curKashoIdx === null) return;
+  var k = kashoList[curKashoIdx];
   var now = new Date();
   var timeStr = now.getHours() + ':' + pad2(now.getMinutes());
-  k.photos.push({ filename: fn, time: timeStr });
+  var baseName = pendingFilename.replace('.jpg','');
+  k.photos.push({filename: baseName, time: timeStr});
   saveState();
-  updateShootScreen();
   // ダウンロード
-  var fullFn = fn + '.jpg';
-  var renamedFile = new File([file], fullFn, {type:'image/jpeg'});
+  var renamedFile = new File([pendingFile], pendingFilename, {type:'image/jpeg'});
   var url = URL.createObjectURL(renamedFile);
   var a = document.createElement('a');
-  a.href = url; a.download = fullFn;
+  a.href = url; a.download = pendingFilename;
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(function(){ URL.revokeObjectURL(url); }, 5000);
-  var nt = document.getElementById('notice');
-  var ht = document.getElementById('hint');
-  nt.textContent = fullFn + ' を保存しました';
-  ht.textContent = 'ダウンロードフォルダに保存されます';
-  setTimeout(function(){ nt.textContent=''; ht.textContent=''; }, 6000);
-}
-
-// --- 箇所番号追加 ---
-function showAddKasho() {
-  document.getElementById('m-kasho-num').value = '';
-  document.getElementById('m-add').style.display = 'block';
-  setTimeout(function(){ document.getElementById('m-kasho-num').focus(); }, 100);
-}
-function closeM(id) { document.getElementById(id).style.display = 'none'; }
-function doAddKasho() {
-  var raw = document.getElementById('m-kasho-num').value.trim();
-  if (!raw) { alert('箇所番号を入力してください。'); return; }
-  // 数値として正規化して2桁ゼロ埋め
-  var num = pad2(parseInt(raw, 10));
-  if (isNaN(parseInt(raw, 10))) { alert('数字で入力してください。'); return; }
-  if (kashoList.find(function(k){ return k.num === num; })) {
-    alert('箇所番号 ' + num + ' は既に存在します。'); return;
-  }
-  kashoList.push({ num: num, photos: [] });
-  // 番号順にソート
-  kashoList.sort(function(a,b){ return parseInt(a.num)-parseInt(b.num); });
-  saveState();
-  closeM('m-add');
-  renderKashoSection();
-}
-
-// --- リセット ---
-function resetKasho() {
-  var k = kashoList[curKashoIdx];
-  if (!confirm(genbaName + k.num + ' の撮影記録をリセットしますか？')) return;
-  k.photos = [];
-  saveState();
+  pendingFile = null;
   updateShootScreen();
+  showScreen('s-shoot');
+}
+
+function skipSave() {
+  // 保存せずに撮影画面に戻る
+  pendingFile = null;
+  if (pendingObjectUrl) { URL.revokeObjectURL(pendingObjectUrl); pendingObjectUrl=''; }
+  showScreen('s-shoot');
+}
+
+function showScreen(id) {
+  ['s-home','s-shoot','s-save'].forEach(function(s){
+    document.getElementById(s).classList.remove('active');
+  });
+  document.getElementById(id).classList.add('active');
 }
 
 function goHome() {
-  document.getElementById('s-home').classList.add('active');
-  document.getElementById('s-shoot').classList.remove('active');
   renderKashoSection();
+  showScreen('s-home');
 }
 
-function clearNotice() {
-  document.getElementById('notice').textContent = '';
-  document.getElementById('hint').textContent = '';
+function showAddKasho() {
+  document.getElementById('m-kasho-num').value='';
+  document.getElementById('m-add').style.display='block';
+  setTimeout(function(){ document.getElementById('m-kasho-num').focus(); },100);
+}
+function closeM(id){ document.getElementById(id).style.display='none'; }
+function doAddKasho() {
+  var raw = document.getElementById('m-kasho-num').value.trim();
+  if (!raw) { alert('箇所番号を入力してください。'); return; }
+  var num = pad2(parseInt(raw,10));
+  if (isNaN(parseInt(raw,10))) { alert('数字で入力してください。'); return; }
+  if (kashoList.find(function(k){ return k.num===num; })) { alert('箇所番号 '+num+' は既に存在します。'); return; }
+  kashoList.push({num:num,photos:[]});
+  kashoList.sort(function(a,b){ return parseInt(a.num)-parseInt(b.num); });
+  saveState(); closeM('m-add'); renderKashoSection();
 }
 
-function pad2(n) { return ('0' + n).slice(-2); }
+function resetKasho() {
+  var k = kashoList[curKashoIdx];
+  if (!confirm(genbaName+k.num+' の撮影記録をリセットしますか？')) return;
+  k.photos=[]; saveState(); updateShootScreen();
+}
 
-// --- 初期化 ---
+function pad2(n){ return ('0'+n).slice(-2); }
+
 loadState();
-if (genbaName) {
-  showGenbaName();
-  renderKashoSection();
-}
+if (genbaName) { showGenbaName(); renderKashoSection(); }
 </script>
 </body>
 </html>
