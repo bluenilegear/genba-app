@@ -4,6 +4,27 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>現場撮影</title>
+<link rel="apple-touch-icon" href="icon.png">
+<script>
+(function(){
+  var c=document.createElement('canvas');
+  c.width=180;c.height=180;
+  var ctx=c.getContext('2d');
+  // 背景
+  ctx.fillStyle='#639922';
+  ctx.fillRect(0,0,180,180);
+  // 絵文字
+  ctx.font='100px serif';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('📷',90,95);
+  var url=c.toDataURL('image/png');
+  var link=document.createElement('link');
+  link.rel='apple-touch-icon';
+  link.href=url;
+  document.head.appendChild(link);
+})();
+</script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:-apple-system,'Hiragino Sans',sans-serif;background:#f0ede8;}
