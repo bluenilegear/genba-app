@@ -8,22 +8,11 @@
 <link rel="manifest" href="manifest.json">
 <script>
 (function(){
-  var c=document.createElement('canvas');
-  c.width=180;c.height=180;
-  var ctx=c.getContext('2d');
-  // 背景
-  ctx.fillStyle='#639922';
-  ctx.fillRect(0,0,180,180);
-  // 絵文字
-  ctx.font='100px serif';
-  ctx.textAlign='center';
-  ctx.textBaseline='middle';
-  ctx.fillText('📷',90,95);
-  var url=c.toDataURL('image/png');
-  var link=document.createElement('link');
-  link.rel='apple-touch-icon';
-  link.href=url;
-  document.head.appendChild(link);
+  var c=document.createElement('canvas');c.width=180;c.height=180;
+  var ctx=c.getContext('2d');ctx.fillStyle='#639922';ctx.fillRect(0,0,180,180);
+  ctx.font='100px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('📷',90,95);
+  var url=c.toDataURL('image/png');var link=document.createElement('link');
+  link.rel='apple-touch-icon';link.href=url;document.head.appendChild(link);
 })();
 </script>
 <style>
@@ -33,15 +22,26 @@ body{font-family:-apple-system,'Hiragino Sans',sans-serif;background:#f0ede8;}
 .screen{display:none;}.screen.active{display:block;}
 h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #ddd;color:#1a1a1a;}
 .back-btn{background:none;border:none;color:#666;font-size:14px;padding:6px 0;margin-bottom:10px;cursor:pointer;display:block;}
-/* ホーム画面 */
-.genba-name-area{background:#fff;border:1px solid #ddd;border-radius:12px;padding:14px;margin-bottom:16px;}
-.genba-name-area label{font-size:11px;color:#888;font-weight:600;letter-spacing:0.4px;display:block;margin-bottom:6px;}
-.genba-name-row{display:flex;gap:8px;align-items:center;}
-.genba-name-row input{flex:1;padding:8px;border:1px solid #ddd;border-radius:8px;font-size:16px;font-weight:600;color:#1a1a1a;}
-.genba-name-row button{padding:8px 14px;background:#639922;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;white-space:nowrap;}
-.genba-display{font-size:18px;font-weight:700;color:#1a1a1a;padding:4px 0;}
-.genba-edit-btn{font-size:12px;color:#639922;background:none;border:none;cursor:pointer;margin-left:8px;text-decoration:underline;}
 .sl{font-size:11px;font-weight:600;color:#999;letter-spacing:0.4px;margin:14px 0 8px;}
+
+/* 現場一覧 */
+.genba-card{background:#fff;border:1px solid #ddd;border-radius:12px;margin-bottom:10px;overflow:hidden;}
+.genba-card.active-genba{background:#EAF3DE;border-color:#97C459;}
+.genba-card-inner{padding:14px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;}
+.genba-card-inner:active{opacity:0.7;}
+.genba-card-name{font-size:18px;font-weight:700;color:#1a1a1a;}
+.active-genba .genba-card-name{color:#27500A;}
+.genba-card-meta{font-size:11px;color:#999;margin-top:3px;}
+.active-genba .genba-card-meta{color:#3B6D11;}
+.genba-card-arrow{font-size:18px;color:#ccc;}
+.genba-card-actions{display:flex;border-top:1px solid #eee;}
+.genba-card-actions button{flex:1;padding:8px;background:none;border:none;border-right:1px solid #eee;font-size:12px;color:#999;cursor:pointer;}
+.genba-card-actions button:last-child{border-right:none;}
+.genba-card-actions button.danger{color:#c0392b;}
+.add-genba-btn{width:100%;padding:14px;background:#639922;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;margin-top:4px;}
+.add-genba-btn:active{background:#4a7318;}
+
+/* 箇所一覧 */
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px;}
 .kasho-card{border:1px solid #ddd;border-radius:12px;background:#fff;overflow:hidden;}
 .kasho-card:active{opacity:0.7;}
@@ -54,10 +54,11 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .kasho-edit-btn{display:block;width:100%;padding:6px;background:rgba(0,0,0,0.04);border:none;border-top:1px solid #eee;font-size:11px;color:#999;cursor:pointer;text-align:center;}
 .next-kasho-btn{width:100%;padding:14px;background:#fff;border:1px solid #97C459;border-radius:12px;font-size:15px;color:#27500A;font-weight:600;cursor:pointer;margin-top:8px;}
 .next-kasho-btn:active{background:#EAF3DE;}
+.genba-info-bar{background:#fff;border:1px solid #ddd;border-radius:10px;padding:10px 14px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;}
+.genba-info-bar-name{font-size:15px;font-weight:700;color:#27500A;}
+.genba-info-bar-sub{font-size:11px;color:#999;}
 
-/* ============================
-   撮影画面・保存確認画面（縦向きデフォルト）
-   ============================ */
+/* 撮影画面 */
 .kasho-header{background:#fff;border:1px solid #ddd;border-radius:12px;padding:14px;margin-bottom:12px;}
 .kasho-header-num{font-size:22px;font-weight:700;color:#1a1a1a;}
 .kasho-header-sub{font-size:12px;color:#888;margin-top:2px;}
@@ -81,7 +82,7 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .empty-log{text-align:center;color:#bbb;font-size:12px;padding:10px 0;}
 .rstbtn{width:100%;padding:10px;background:#fff;color:#c0392b;border:1px solid #ffb3b3;border-radius:12px;font-size:13px;cursor:pointer;margin-top:4px;}
 
-/* 保存確認画面 */
+/* 保存確認 */
 .preview-area{background:#000;border-radius:12px;overflow:hidden;margin-bottom:12px;}
 .preview-img{width:100%;max-height:45vh;object-fit:contain;display:block;}
 .preview-filename{background:#fff;padding:10px 14px;font-size:13px;color:#555;font-weight:500;}
@@ -98,153 +99,65 @@ h1{font-size:18px;font-weight:500;margin-bottom:14px;padding-bottom:12px;border-
 .mbt{display:flex;gap:8px;margin-top:12px;}
 .mbt button{flex:1;padding:10px;border:1px solid #ddd;border-radius:8px;background:#fff;cursor:pointer;font-size:14px;}
 .mbt button.primary{background:#639922;color:#fff;border-color:#639922;}
+.mbt button.danger{background:#c0392b;color:#fff;border-color:#c0392b;}
 input[type=file]{display:none;}
 
-/* ============================
-   横向きレイアウト
-   ============================ */
+/* 横向き */
 @media (orientation: landscape) {
   body{background:#1a1a1a;}
   .app{max-width:100%;padding:0;}
-
-  /* ホーム画面は縦向きレイアウトのまま白背景で中央 */
-  #s-home{
-    max-width:500px;
-    margin:0 auto;
-    padding:12px 16px 40px;
-    background:#f0ede8;
-    min-height:100vh;
-  }
-
-  /* 撮影画面・保存確認画面：左右2カラム */
-  #s-shoot, #s-preview{
-    display:none;
-    height:100vh;
-    overflow:hidden;
-  }
-  #s-shoot.active, #s-preview.active{
-    display:flex;
-    flex-direction:row;
-  }
-
-  /* 左カラム：情報・ログ */
-  .land-left{
-    flex:1;
-    overflow-y:auto;
-    padding:12px 10px 12px 14px;
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-  }
-  /* 右カラム：ボタン群 */
-  .land-right{
-    width:200px;
-    min-width:180px;
-    padding:12px 14px 12px 8px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    gap:10px;
-    background:#f0ede8;
-    border-left:1px solid #ddd;
-  }
-
-  /* 横向き時のボタンサイズ */
-  .land-right .shoot-btn{
-    padding:0;
-    height:80px;
-    font-size:20px;
-    margin-bottom:0;
-  }
-  .land-right .next-btn{
-    padding:0;
-    height:60px;
-    font-size:15px;
-    margin-bottom:0;
-  }
-  .land-right .save-btn{
-    padding:0;
-    height:80px;
-    font-size:20px;
-    margin-bottom:0;
-  }
-  .land-right .cancel-photo-btn{
-    padding:0;
-    height:52px;
-    font-size:13px;
-    margin-bottom:0;
-  }
-  .land-right .rstbtn{
-    padding:0;
-    height:44px;
-    font-size:12px;
-    margin-top:0;
-  }
-  .land-right .back-btn{
-    margin-bottom:0;
-    font-size:13px;
-  }
-
-  /* 横向き時のヘッダー・ログ縮小 */
+  #s-genba-list,#s-kasho-list{max-width:500px;margin:0 auto;padding:12px 16px 40px;background:#f0ede8;min-height:100vh;}
+  #s-shoot,#s-preview{display:none;height:100vh;overflow:hidden;}
+  #s-shoot.active,#s-preview.active{display:flex;flex-direction:row;}
+  .land-left{flex:1;overflow-y:auto;padding:12px 10px 12px 14px;display:flex;flex-direction:column;gap:8px;}
+  .land-right{width:200px;min-width:180px;padding:12px 14px 12px 8px;display:flex;flex-direction:column;justify-content:center;gap:10px;background:#f0ede8;border-left:1px solid #ddd;}
+  .land-right .shoot-btn{padding:0;height:80px;font-size:20px;margin-bottom:0;}
+  .land-right .next-btn{padding:0;height:60px;font-size:15px;margin-bottom:0;}
+  .land-right .save-btn{padding:0;height:80px;font-size:20px;margin-bottom:0;}
+  .land-right .cancel-photo-btn{padding:0;height:52px;font-size:13px;margin-bottom:0;}
+  .land-right .rstbtn{padding:0;height:44px;font-size:12px;margin-top:0;}
+  .land-right .back-btn{margin-bottom:0;font-size:13px;}
   .kasho-header{margin-bottom:6px;padding:10px 12px;}
   .kasho-header-num{font-size:18px;}
   .next-fn-preview{margin-bottom:6px;padding:8px 10px;font-size:12px;}
   .next-fn-preview span{font-size:13px;}
   .photo-log{margin-bottom:0;padding:10px;}
   .photo-log-title{margin-bottom:6px;}
-
-  /* 保存確認：左に画像 */
-  .land-left .preview-area{
-    flex:1;
-    margin-bottom:0;
-    border-radius:8px;
-    display:flex;
-    flex-direction:column;
-  }
-  .land-left .preview-img{
-    flex:1;
-    max-height:none;
-    object-fit:contain;
-  }
-  .land-left .preview-filename{
-    flex-shrink:0;
-  }
+  .land-left .preview-area{flex:1;margin-bottom:0;border-radius:8px;display:flex;flex-direction:column;}
+  .land-left .preview-img{flex:1;max-height:none;object-fit:contain;}
+  .land-left .preview-filename{flex-shrink:0;}
 }
 </style>
 </head>
 <body>
 <div class="app">
 
-<!-- ホーム -->
-<div class="screen active" id="s-home">
+<!-- 現場一覧 -->
+<div class="screen active" id="s-genba-list">
   <h1>現場撮影</h1>
-  <div class="genba-name-area">
-    <label>現場名</label>
-    <div id="genba-name-set">
-      <div class="genba-name-row">
-        <input type="text" id="genba-input" placeholder="例: 岡山" maxlength="20"/>
-        <button onclick="setGenbaName()">設定</button>
-      </div>
-    </div>
-    <div id="genba-name-display" style="display:none;">
-      <div style="display:flex;align-items:center;">
-        <div class="genba-display" id="genba-display-text"></div>
-        <button class="genba-edit-btn" onclick="editGenbaName()">変更</button>
-      </div>
+  <div class="sl">現場一覧</div>
+  <div id="genba-list"></div>
+  <button class="add-genba-btn" onclick="showAddGenba()">＋ 新しい現場を追加</button>
+</div>
+
+<!-- 箇所一覧 -->
+<div class="screen" id="s-kasho-list">
+  <button class="back-btn" onclick="showScreen('s-genba-list');renderGenbaList()">← 現場一覧</button>
+  <div class="genba-info-bar">
+    <div>
+      <div class="genba-info-bar-name" id="kasho-genba-name"></div>
+      <div class="genba-info-bar-sub" id="kasho-genba-sub"></div>
     </div>
   </div>
-  <div id="kasho-section" style="display:none;">
-    <div class="sl">調査箇所</div>
-    <div class="grid" id="kasho-list"></div>
-    <button class="next-kasho-btn" onclick="addNextKasho()">＋ 次の箇所番号を追加</button>
-  </div>
+  <div class="sl">調査箇所</div>
+  <div class="grid" id="kasho-list"></div>
+  <button class="next-kasho-btn" onclick="addNextKasho()">＋ 次の箇所番号を追加</button>
 </div>
 
 <!-- 撮影画面 -->
 <div class="screen" id="s-shoot">
-  <!-- 左カラム（情報・ログ） -->
   <div class="land-left">
-    <button class="back-btn" onclick="goHome()">← 箇所一覧</button>
+    <button class="back-btn" onclick="goKashoList()">← 箇所一覧</button>
     <div class="kasho-header">
       <div class="kasho-header-num" id="shoot-kasho-num"></div>
       <div class="kasho-header-sub" id="shoot-kasho-sub"></div>
@@ -257,7 +170,6 @@ input[type=file]{display:none;}
       <div id="photo-log-list"><div class="empty-log">まだ撮影していません</div></div>
     </div>
   </div>
-  <!-- 右カラム（ボタン） -->
   <div class="land-right">
     <button class="shoot-btn" onclick="doShoot()">📷 撮影する</button>
     <button class="next-btn" onclick="goNextKasho()">次の箇所へ →</button>
@@ -267,7 +179,6 @@ input[type=file]{display:none;}
 
 <!-- 保存確認画面 -->
 <div class="screen" id="s-preview">
-  <!-- 左カラム（画像） -->
   <div class="land-left">
     <div class="kasho-header">
       <div class="kasho-header-num" id="preview-kasho-num"></div>
@@ -278,10 +189,53 @@ input[type=file]{display:none;}
       <div class="preview-filename" id="preview-filename"></div>
     </div>
   </div>
-  <!-- 右カラム（ボタン） -->
   <div class="land-right">
     <a id="save-link" class="save-btn" style="display:flex;align-items:center;justify-content:center;text-decoration:none;" onclick="onSaveTap()">💾 保存する</a>
     <button class="cancel-photo-btn" onclick="cancelPhoto()">撮り直す</button>
+  </div>
+</div>
+
+<!-- 現場追加モーダル -->
+<div id="m-add-genba" style="display:none;">
+  <div class="mbg" onclick="closeM('m-add-genba')">
+    <div class="md" onclick="event.stopPropagation()">
+      <h3>新しい現場を追加</h3>
+      <p>現場名を入力してください</p>
+      <input type="text" id="m-genba-name" placeholder="例: 加茂用瀬" maxlength="20"/>
+      <div class="mbt">
+        <button onclick="closeM('m-add-genba')">キャンセル</button>
+        <button class="primary" onclick="doAddGenba()">追加</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 現場削除確認モーダル（2段階） -->
+<div id="m-del-genba" style="display:none;">
+  <div class="mbg">
+    <div class="md">
+      <h3>現場を削除しますか？</h3>
+      <p id="m-del-genba-msg"></p>
+      <p style="color:#c0392b;font-size:12px;margin-top:4px;">この操作は取り消せません。</p>
+      <div class="mbt">
+        <button onclick="closeM('m-del-genba')">キャンセル</button>
+        <button class="danger" onclick="showDelConfirm2()">削除する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 現場削除2段階目 -->
+<div id="m-del-genba2" style="display:none;">
+  <div class="mbg">
+    <div class="md">
+      <h3>本当に削除しますか？</h3>
+      <p id="m-del-genba2-msg"></p>
+      <div class="mbt">
+        <button onclick="closeM('m-del-genba2')">やめる</button>
+        <button class="danger" onclick="doDeleteGenba()">完全に削除する</button>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -304,63 +258,138 @@ input[type=file]{display:none;}
 </div>
 
 <script>
-var genbaName = '';
-var kashoList = [];
+// genbas: [{name:'岡山', kashoList:[{num:'01', photos:[...]}]}, ...]
+var genbas = [];
+var curGenbaIdx = null;
 var curKashoIdx = null;
 var editingKashoIdx = null;
+var deletingGenbaIdx = null;
 var pendingFile = null;
 var pendingFilename = '';
 var pendingObjectUrl = '';
 
 function loadState() {
   try {
-    var s = localStorage.getItem('genba_v2');
+    var s = localStorage.getItem('genba_v3');
     if (s) {
       var d = JSON.parse(s);
-      genbaName = d.genbaName || '';
-      kashoList = d.kashoList || [];
+      genbas = d.genbas || [];
+    } else {
+      // v2からの移行
+      var old = localStorage.getItem('genba_v2');
+      if (old) {
+        var od = JSON.parse(old);
+        if (od.genbaName) {
+          genbas = [{ name: od.genbaName, kashoList: od.kashoList || [] }];
+          saveState();
+        }
+      }
     }
   } catch(e) {}
 }
 function saveState() {
   try {
-    localStorage.setItem('genba_v2', JSON.stringify({genbaName:genbaName, kashoList:kashoList}));
+    localStorage.setItem('genba_v3', JSON.stringify({genbas:genbas}));
   } catch(e) {}
 }
 
-function setGenbaName() {
-  var v = document.getElementById('genba-input').value.trim();
-  if (!v) { alert('現場名を入力してください。'); return; }
-  genbaName = v;
-  if (kashoList.length === 0) kashoList.push({ num:'01', photos:[] });
-  saveState();
-  showGenbaName();
-  renderKashoSection();
-}
-function showGenbaName() {
-  document.getElementById('genba-name-set').style.display = 'none';
-  document.getElementById('genba-name-display').style.display = 'block';
-  document.getElementById('genba-display-text').textContent = genbaName;
-}
-function editGenbaName() {
-  document.getElementById('genba-input').value = genbaName;
-  document.getElementById('genba-name-set').style.display = 'block';
-  document.getElementById('genba-name-display').style.display = 'none';
+// --- 現場一覧 ---
+function renderGenbaList() {
+  var el = document.getElementById('genba-list');
+  el.innerHTML = '';
+  if (genbas.length === 0) {
+    el.innerHTML = '<div style="text-align:center;color:#bbb;font-size:13px;padding:20px 0;">現場がまだありません</div>';
+    return;
+  }
+  genbas.forEach(function(g, i) {
+    var totalPhotos = g.kashoList.reduce(function(sum,k){ return sum+k.photos.length; }, 0);
+    var totalKasho = g.kashoList.length;
+    var card = document.createElement('div');
+    card.className = 'genba-card' + (i === curGenbaIdx ? ' active-genba' : '');
+    card.innerHTML =
+      '<div class="genba-card-inner" onclick="openGenba('+i+')">' +
+        '<div>' +
+          '<div class="genba-card-name">'+g.name+'</div>' +
+          '<div class="genba-card-meta">箇所 '+totalKasho+'件 / 写真 '+totalPhotos+'枚</div>' +
+        '</div>' +
+        '<div class="genba-card-arrow">›</div>' +
+      '</div>' +
+      '<div class="genba-card-actions">' +
+        '<button onclick="showRenameGenba('+i+')">名前を変更</button>' +
+        '<button class="danger" onclick="showDeleteGenba('+i+')">削除</button>' +
+      '</div>';
+    el.appendChild(card);
+  });
 }
 
-function renderKashoSection() {
-  var sec = document.getElementById('kasho-section');
-  if (!genbaName) { sec.style.display='none'; return; }
-  sec.style.display = 'block';
+function showAddGenba() {
+  document.getElementById('m-genba-name').value = '';
+  document.getElementById('m-add-genba').style.display = 'block';
+  setTimeout(function(){ document.getElementById('m-genba-name').focus(); }, 100);
+}
+function doAddGenba() {
+  var v = document.getElementById('m-genba-name').value.trim();
+  if (!v) { alert('現場名を入力してください。'); return; }
+  genbas.push({ name: v, kashoList: [{ num:'01', photos:[] }] });
+  saveState();
+  closeM('m-add-genba');
+  renderGenbaList();
+}
+
+function showRenameGenba(i) {
+  // 名前変更はシンプルにpromptで（データは変えない）
+  var newName = prompt('新しい現場名:', genbas[i].name);
+  if (!newName || !newName.trim()) return;
+  genbas[i].name = newName.trim();
+  saveState();
+  renderGenbaList();
+}
+
+function showDeleteGenba(i) {
+  deletingGenbaIdx = i;
+  var g = genbas[i];
+  var total = g.kashoList.reduce(function(sum,k){ return sum+k.photos.length; }, 0);
+  document.getElementById('m-del-genba-msg').textContent =
+    '「'+g.name+'」を削除します。（箇所'+g.kashoList.length+'件・写真'+total+'枚のデータが消えます）';
+  document.getElementById('m-del-genba').style.display = 'block';
+}
+function showDelConfirm2() {
+  var g = genbas[deletingGenbaIdx];
+  document.getElementById('m-del-genba2-msg').textContent =
+    '「'+g.name+'」のすべてのデータを完全に削除します。本当によろしいですか？';
+  closeM('m-del-genba');
+  document.getElementById('m-del-genba2').style.display = 'block';
+}
+function doDeleteGenba() {
+  if (deletingGenbaIdx === curGenbaIdx) curGenbaIdx = null;
+  genbas.splice(deletingGenbaIdx, 1);
+  saveState();
+  closeM('m-del-genba2');
+  renderGenbaList();
+}
+
+function openGenba(i) {
+  curGenbaIdx = i;
+  curKashoIdx = null;
+  renderKashoList();
+  showScreen('s-kasho-list');
+}
+
+// --- 箇所一覧 ---
+function renderKashoList() {
+  var g = genbas[curGenbaIdx];
+  document.getElementById('kasho-genba-name').textContent = g.name;
+  var total = g.kashoList.reduce(function(sum,k){ return sum+k.photos.length; }, 0);
+  document.getElementById('kasho-genba-sub').textContent = '箇所'+g.kashoList.length+'件 / 写真'+total+'枚';
   var el = document.getElementById('kasho-list');
   el.innerHTML = '';
-  kashoList.forEach(function(k, i) {
-    var card = document.createElement('div');
+  g.kashoList.forEach(function(k, i) {
     var cnt = k.photos.length;
+    var card = document.createElement('div');
     card.className = 'kasho-card' + (cnt > 0 ? ' has-photos' : '');
     card.innerHTML =
       '<div class="kasho-inner" onclick="openKasho('+i+')">' +
-        '<div class="kasho-num">'+genbaName+k.num+'</div>' +
+        '<div class="kasho-num">'+g.name+k.num+'</div>' +
         '<div class="kasho-count">'+(cnt > 0 ? cnt+'枚撮影済み' : '未撮影')+'</div>' +
       '</div>' +
       '<button class="kasho-edit-btn" onclick="showEditKasho('+i+')">番号を編集</button>';
@@ -369,28 +398,30 @@ function renderKashoSection() {
 }
 
 function addNextKasho() {
-  var lastNum = kashoList.length > 0 ? parseInt(kashoList[kashoList.length-1].num) : 0;
+  var g = genbas[curGenbaIdx];
+  var lastNum = g.kashoList.length > 0 ? parseInt(g.kashoList[g.kashoList.length-1].num) : 0;
   var nextNum = pad2(lastNum+1);
-  if (kashoList.find(function(k){ return k.num===nextNum; })) { alert('箇所番号 '+nextNum+' は既に存在します。'); return; }
-  kashoList.push({ num:nextNum, photos:[] });
+  if (g.kashoList.find(function(k){ return k.num===nextNum; })) { alert('箇所番号 '+nextNum+' は既に存在します。'); return; }
+  g.kashoList.push({ num:nextNum, photos:[] });
   saveState();
-  renderKashoSection();
+  renderKashoList();
 }
 
 function goNextKasho() {
-  var lastNum = parseInt(kashoList[kashoList.length-1].num);
+  var g = genbas[curGenbaIdx];
+  var lastNum = parseInt(g.kashoList[g.kashoList.length-1].num);
   var nextNum = pad2(lastNum+1);
-  if (!kashoList.find(function(k){ return k.num===nextNum; })) {
-    kashoList.push({ num:nextNum, photos:[] });
+  if (!g.kashoList.find(function(k){ return k.num===nextNum; })) {
+    g.kashoList.push({ num:nextNum, photos:[] });
     saveState();
   }
-  var nextIdx = kashoList.findIndex(function(k){ return k.num===nextNum; });
+  var nextIdx = g.kashoList.findIndex(function(k){ return k.num===nextNum; });
   openKasho(nextIdx);
 }
 
 function showEditKasho(i) {
   editingKashoIdx = i;
-  document.getElementById('m-edit-num').value = kashoList[i].num;
+  document.getElementById('m-edit-num').value = genbas[curGenbaIdx].kashoList[i].num;
   document.getElementById('m-edit').style.display = 'block';
   setTimeout(function(){ document.getElementById('m-edit-num').focus(); }, 100);
 }
@@ -398,13 +429,14 @@ function doEditKasho() {
   var raw = document.getElementById('m-edit-num').value.trim();
   if (!raw || isNaN(parseInt(raw,10))) { alert('数字で入力してください。'); return; }
   var num = pad2(parseInt(raw,10));
-  var conflict = kashoList.findIndex(function(k){ return k.num===num; });
+  var g = genbas[curGenbaIdx];
+  var conflict = g.kashoList.findIndex(function(k){ return k.num===num; });
   if (conflict !== -1 && conflict !== editingKashoIdx) { alert('箇所番号 '+num+' は既に存在します。'); return; }
-  kashoList[editingKashoIdx].num = num;
-  kashoList.sort(function(a,b){ return parseInt(a.num)-parseInt(b.num); });
+  g.kashoList[editingKashoIdx].num = num;
+  g.kashoList.sort(function(a,b){ return parseInt(a.num)-parseInt(b.num); });
   saveState();
   closeM('m-edit');
-  renderKashoSection();
+  renderKashoList();
 }
 
 function openKasho(i) {
@@ -413,11 +445,18 @@ function openKasho(i) {
   showScreen('s-shoot');
 }
 
+function goKashoList() {
+  renderKashoList();
+  showScreen('s-kasho-list');
+}
+
+// --- 撮影 ---
 function updateShootScreen() {
-  var k = kashoList[curKashoIdx];
+  var g = genbas[curGenbaIdx];
+  var k = g.kashoList[curKashoIdx];
   var nextNum = k.photos.length + 1;
-  var nextFn = genbaName + k.num + '-' + pad2(nextNum);
-  document.getElementById('shoot-kasho-num').textContent = genbaName + k.num;
+  var nextFn = g.name + k.num + '-' + pad2(nextNum);
+  document.getElementById('shoot-kasho-num').textContent = g.name + k.num;
   document.getElementById('shoot-kasho-sub').textContent = '枝番は ' + pad2(nextNum) + ' から続きます';
   document.getElementById('next-fn-text').textContent = nextFn + '.jpg';
   renderPhotoLog(k);
@@ -432,8 +471,7 @@ function renderPhotoLog(k) {
   el.innerHTML = '';
   k.photos.slice().reverse().forEach(function(p) {
     var item = document.createElement('div');
-    var cls = p.saved ? 'photo-item saved' : 'photo-item unsaved';
-    item.className = cls;
+    item.className = p.saved ? 'photo-item saved' : 'photo-item unsaved';
     item.innerHTML =
       '<span class="photo-item-name">'+p.filename+'.jpg</span>' +
       '<span class="photo-item-time">'+p.time+'</span>';
@@ -449,29 +487,28 @@ function doShoot() {
 
 function onPhoto(e) {
   var file = e.target.files[0];
-  if (!file || curKashoIdx === null) return;
-  var k = kashoList[curKashoIdx];
+  if (!file || curGenbaIdx === null || curKashoIdx === null) return;
+  var g = genbas[curGenbaIdx];
+  var k = g.kashoList[curKashoIdx];
   var nextNum = k.photos.length + 1;
-  var fn = genbaName + k.num + '-' + pad2(nextNum) + '.jpg';
+  var fn = g.name + k.num + '-' + pad2(nextNum) + '.jpg';
   pendingFile = file;
   pendingFilename = fn;
   if (pendingObjectUrl) URL.revokeObjectURL(pendingObjectUrl);
   pendingObjectUrl = URL.createObjectURL(file);
 
-  // 保存リンク（aタグ）にhref/downloadをセット
   var renamedFile = new File([file], fn, {type:'image/jpeg'});
   var dlUrl = URL.createObjectURL(renamedFile);
   var saveLink = document.getElementById('save-link');
   saveLink.href = dlUrl;
   saveLink.setAttribute('download', fn);
 
-  // 未保存としてログに追加
   var now = new Date();
   var timeStr = now.getHours() + ':' + pad2(now.getMinutes());
   k.photos.push({ filename: fn.replace('.jpg',''), time: timeStr, saved: false });
   saveState();
 
-  document.getElementById('preview-kasho-num').textContent = genbaName + k.num;
+  document.getElementById('preview-kasho-num').textContent = g.name + k.num;
   document.getElementById('preview-kasho-sub').textContent = 'ファイル名: ' + fn;
   document.getElementById('preview-filename').textContent = fn;
   document.getElementById('preview-img').src = pendingObjectUrl;
@@ -480,10 +517,8 @@ function onPhoto(e) {
 
 function onSaveTap() {
   if (!pendingFile) return;
-  var k = kashoList[curKashoIdx];
-  if (k.photos.length > 0) {
-    k.photos[k.photos.length-1].saved = true;
-  }
+  var k = genbas[curGenbaIdx].kashoList[curKashoIdx];
+  if (k.photos.length > 0) k.photos[k.photos.length-1].saved = true;
   saveState();
   pendingFile = null; pendingFilename = '';
   setTimeout(function(){
@@ -493,8 +528,7 @@ function onSaveTap() {
 }
 
 function cancelPhoto() {
-  // 未保存のまま撮り直し：最後に追加した未保存エントリを削除
-  var k = kashoList[curKashoIdx];
+  var k = genbas[curGenbaIdx].kashoList[curKashoIdx];
   if (k.photos.length > 0 && !k.photos[k.photos.length-1].saved) {
     k.photos.pop();
     saveState();
@@ -507,28 +541,23 @@ function cancelPhoto() {
 }
 
 function resetKasho() {
-  var k = kashoList[curKashoIdx];
-  if (!confirm(genbaName + k.num + ' の撮影記録をリセットしますか？')) return;
+  var g = genbas[curGenbaIdx];
+  var k = g.kashoList[curKashoIdx];
+  if (!confirm(g.name + k.num + ' の撮影記録をリセットしますか？')) return;
   k.photos = [];
   saveState();
   updateShootScreen();
-}
-
-function goHome() {
-  showScreen('s-home');
-  renderKashoSection();
 }
 
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(function(s){ s.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
 }
-
 function closeM(id) { document.getElementById(id).style.display='none'; }
 function pad2(n) { return ('0'+n).slice(-2); }
 
 loadState();
-if (genbaName) { showGenbaName(); renderKashoSection(); }
+renderGenbaList();
 </script>
 </body>
 </html>
